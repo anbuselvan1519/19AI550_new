@@ -1,6 +1,7 @@
 # Ex.No: 6  Implementation of Jumping  behaviour- Unity
-### DATE:                                                                            
-### REGISTER NUMBER : 
+### DATE: 15/05/2026   
+### NAME : ANBUSELVAN S
+### REGISTER NUMBER : 212223240008
 ### AIM: 
 To write a program to simulate the process of jumping in Unity.
 ### Algorithm:
@@ -29,7 +30,8 @@ public class PlayerJump : MonoBehaviour
 {
     private Rigidbody rb;
     public float jumpForce = 5f;
-    
+    private bool isGrounded;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -37,25 +39,27 @@ public class PlayerJump : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) )
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            
+            isGrounded = false;
         }
     }
 
-   
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = true;
+        }
+    }
 }
 ```
 ### Output:
 
+<img width="1915" height="1021" alt="image" src="https://github.com/user-attachments/assets/b7434312-cdaa-494f-b509-207e72fc2c93" />
 
-
-
-
-
-
-
+<img width="1919" height="1016" alt="image" src="https://github.com/user-attachments/assets/1add7d2c-9e3b-4480-8053-09fb5f03c2bc" />
 
 ### Result:
 Thus the simple jumping behavior was implemented successfully.
